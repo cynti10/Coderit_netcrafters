@@ -1,20 +1,27 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
 import HomePage from './components/HomePage';
+import MentalHealthTracker from './components/MentalHealthTracker';
+import ForumPage from './components/ForumPage';
 import ResourceLibrary from './components/ResourceLibrary';
-import Navbar from './components/Navbar';  // Optional - for navigation bar
+import { ThemeContextProvider } from './ThemeContext';
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Navbar />  {/* Optional navigation bar */}
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/resources" element={<ResourceLibrary />} />
-        </Routes>
-      </div>
-    </Router>
+    <ThemeContextProvider>
+      <Router>
+        <div className="App">
+          <Navbar /> {/* Navbar is always visible */}
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/tracker" element={<MentalHealthTracker />} />
+            <Route path="/forum" element={<ForumPage />} />
+            <Route path="/resources" element={<ResourceLibrary />} />
+          </Routes>
+        </div>
+      </Router>
+    </ThemeContextProvider>
   );
 }
 
